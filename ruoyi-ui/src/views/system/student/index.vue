@@ -28,14 +28,7 @@
           <el-option label="男" :value="1"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="出生日期" prop="birthday">
-        <el-date-picker clearable
-          v-model="queryParams.birthday"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择出生日期">
-        </el-date-picker>
-      </el-form-item>
+
       <el-form-item label="身份证号" prop="idCard">
         <el-input
           v-model="queryParams.idCard"
@@ -75,6 +68,14 @@
           clearable
           @keyup.enter.native="handleQuery"
         />
+      </el-form-item>
+      <el-form-item label="出生日期" prop="birthday">
+        <el-date-picker clearable
+                        v-model="queryParams.birthday"
+                        type="date"
+                        value-format="yyyy-MM-dd"
+                        placeholder="请选择出生日期">
+        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -130,21 +131,29 @@
 
     <el-table v-loading="loading" :data="studentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键" align="center" prop="id" />
+      <el-table-column label="主键" align="center" prop="id"  width="80"/>
       <el-table-column label="学号" align="center" prop="studentNo" />
-      <el-table-column label="姓名" align="center" prop="name" />
-      <el-table-column label="性别" align="center" prop="gender" />
-      <el-table-column label="出生日期" align="center" prop="birthday" width="180">
+      <el-table-column label="姓名" align="center" prop="name" width="80"/>
+      <el-table-column label="性别" align="center" prop="gender" width="80">
+        <template #default="scope">
+          <span>{{ scope.row.gender === 0 ? '女' : '男' }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="出生日期" align="center" prop="birthday" width="100">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.birthday, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="身份证号" align="center" prop="idCard" />
+      <el-table-column label="身份证号" align="center" prop="idCard" width="150"/>
       <el-table-column label="手机号" align="center" prop="phone" />
-      <el-table-column label="邮箱" align="center" prop="email" />
-      <el-table-column label="班级ID" align="center" prop="classId" />
+<!--      <el-table-column label="邮箱" align="center" prop="email" />-->
+      <el-table-column label="班级ID" align="center" prop="classId" width="80"/>
       <el-table-column label="班级名称" align="center" prop="className" />
-      <el-table-column label="状态" align="center" prop="status" />
+<!--      <el-table-column label="状态" align="center" prop="status">-->
+<!--        <template #default="scope">-->
+<!--          <span>{{ scope.row.status === 0 ? '正常' : '禁用' }}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -186,7 +195,7 @@
         <el-form-item label="性别" prop="gender">
           <el-input v-model="form.gender" placeholder="请输入性别" />
         </el-form-item>
-        <el-form-item label="出生日期" prop="birthday">
+        <el-form-item label="出生日期" prop="birthday" width="8 0">
           <el-date-picker clearable
             v-model="form.birthday"
             type="date"
@@ -212,8 +221,11 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </el-form-item>
-        <el-form-item label="删除标志" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标志" />
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status" placeholder="请选择状态" clearable>
+            <el-option label="正常" :value="0"></el-option>
+            <el-option label="禁用" :value="1"></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
