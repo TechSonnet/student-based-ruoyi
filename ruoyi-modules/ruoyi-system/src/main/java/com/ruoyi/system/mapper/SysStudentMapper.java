@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysStudent;
+import com.ruoyi.system.domain.dto.StudentQueryRequest;
 
 /**
  * 学生基本信息Mapper接口
@@ -26,6 +27,13 @@ public interface SysStudentMapper
      * @return 学生基本信息集合
      */
     public List<SysStudent> selectSysStudentList(SysStudent sysStudent);
+
+    /**
+     * 获取学生列表，通过DTO
+     * @param sysStudent
+     * @return
+     */
+//    List<SysStudent> selectSysStudentListByDTO(StudentQueryRequest sysStudent);
 
     /**
      * 新增学生基本信息
@@ -58,4 +66,6 @@ public interface SysStudentMapper
      * @return 结果
      */
     public int deleteSysStudentByIds(Long[] ids);
+
+
 }

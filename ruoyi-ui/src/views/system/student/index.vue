@@ -76,8 +76,26 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="日期范围">
+        <el-date-picker
+          clearable
+          v-model="queryParams.startBirthday"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="开始日期"
+          style="width: 180px; margin-right: 10px;"
+        />
+        <el-date-picker
+          clearable
+          v-model="queryParams.endBirthday"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="结束日期"
+          style="width: 180px;"
+        />
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQueryDto">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
@@ -225,7 +243,7 @@
 </template>
 
 <script>
-import { listStudent, getStudent, delStudent, addStudent, updateStudent } from "@/api/system/student"
+import { listStudent, listStudentDto, getStudent, delStudent, addStudent, updateStudent } from "@/api/system/student"
 
 export default {
   name: "Student",
@@ -264,6 +282,8 @@ export default {
         className: null,
         status: null,
         createDept: null,
+        startBirthday: null,  // 出生日期开始
+        endBirthday: null     // 出生日期结束
       },
       // 表单参数
       form: {},
@@ -286,6 +306,15 @@ export default {
     getList() {
       this.loading = true
       listStudent(this.queryParams).then(response => {
+        this.studentList = response.rows
+        this.total = response.total
+        this.loading = false
+      })
+    },
+    /** 查询学生基本信息列表 */
+    getList2() {
+      this.loading = true
+      listStudentDto(this.queryParams).then(response => {
         this.studentList = response.rows
         this.total = response.total
         this.loading = false
@@ -324,6 +353,11 @@ export default {
     handleQuery() {
       this.queryParams.pageNum = 1
       this.getList()
+    },
+    /** 搜索按钮操作 */
+    handleQueryDto() {
+      this.queryParams.pageNum = 1
+      this.getList2()
     },
     /** 重置按钮操作 */
     resetQuery() {

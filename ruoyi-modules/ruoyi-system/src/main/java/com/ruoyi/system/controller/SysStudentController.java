@@ -3,6 +3,10 @@ package com.ruoyi.system.controller;
 import java.util.List;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.domain.dto.StudentQueryRequest;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +34,7 @@ import com.ruoyi.common.core.web.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/student")
+@Log4j2
 public class SysStudentController extends BaseController
 {
     @Autowired
@@ -41,6 +46,14 @@ public class SysStudentController extends BaseController
     @RequiresPermissions("system:student:list")
     @GetMapping("/list")
     public TableDataInfo list(SysStudent sysStudent)
+    {
+        startPage();
+        List<SysStudent> list = sysStudentService.selectSysStudentList(sysStudent);
+        return getDataTable(list);
+    }
+
+    @GetMapping("/list/vo")
+    public TableDataInfo listVo(SysStudent sysStudent)
     {
         startPage();
         List<SysStudent> list = sysStudentService.selectSysStudentList(sysStudent);

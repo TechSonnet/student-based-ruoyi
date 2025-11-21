@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectSysStudentList" parameterType="SysStudent" resultMap="SysStudentResult">
         <include refid="selectSysStudentVo"/>
-        <where>  
+        <where>
             <if test="studentNo != null  and studentNo != ''"> and student_no = #{studentNo}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
@@ -50,6 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSysStudentVo"/>
         where id = #{id}
     </select>
+
+
 
     <insert id="insertSysStudent" parameterType="SysStudent" useGeneratedKeys="true" keyProperty="id">
         insert into sys_student

@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysStudent;
+import com.ruoyi.system.domain.dto.StudentQueryRequest;
 
 /**
  * 学生基本信息Service接口
@@ -26,6 +27,8 @@ public interface ISysStudentService
      * @return 学生基本信息集合
      */
     public List<SysStudent> selectSysStudentList(SysStudent sysStudent);
+
+//    List<SysStudent> selectSysStudentList(StudentQueryRequest sysStudent);
 
     /**
      * 新增学生基本信息
@@ -58,4 +61,6 @@ public interface ISysStudentService
      * @return 结果
      */
     public int deleteSysStudentById(Long id);
+
+
 }

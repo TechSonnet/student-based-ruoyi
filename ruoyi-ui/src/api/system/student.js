@@ -9,6 +9,15 @@ export function listStudent(query) {
   })
 }
 
+// 查询学生基本信息列表
+export function listStudentDto(query) {
+  return request({
+    url: '/system/student/list/vo',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询学生基本信息详细
 export function getStudent(id) {
   return request({

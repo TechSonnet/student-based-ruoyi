@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import com.ruoyi.common.core.utils.DateUtils;
+import com.ruoyi.system.domain.dto.StudentQueryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.SysStudentMapper;
@@ -43,6 +45,11 @@ public class SysStudentServiceImpl implements ISysStudentService
     {
         return sysStudentMapper.selectSysStudentList(sysStudent);
     }
+
+//    @Override
+//    public List<SysStudent> selectSysStudentList(StudentQueryRequest sysStudent) {
+//        return sysStudentMapper.selectSysStudentListByDTO(sysStudent);
+//    }
 
     /**
      * 新增学生基本信息
