@@ -100,4 +100,14 @@ public class SysStudentServiceImpl implements ISysStudentService
     {
         return sysStudentMapper.deleteSysStudentById(id);
     }
+
+    /**
+     * 查询学生列表，通过DTO
+     * @param sysStudent
+     * @return
+     */
+    @Override
+    public List<SysStudent> selectSysStudentListByDTO(StudentQueryRequest sysStudent) {
+        return Collections.emptyList();
+    }
 }

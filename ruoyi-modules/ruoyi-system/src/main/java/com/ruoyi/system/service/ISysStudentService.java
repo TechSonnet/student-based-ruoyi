@@ -63,4 +63,10 @@ public interface ISysStudentService
     public int deleteSysStudentById(Long id);
 
 
+    /**
+     * 获取学生列表，通过DTO
+     * @param sysStudent
+     * @return
+     */
+    List<SysStudent> selectSysStudentListByDTO(StudentQueryRequest sysStudent);
 }

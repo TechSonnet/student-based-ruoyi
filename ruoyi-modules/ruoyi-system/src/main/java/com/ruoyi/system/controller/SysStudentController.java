@@ -53,10 +53,10 @@ public class SysStudentController extends BaseController
     }
 
     @GetMapping("/list/vo")
-    public TableDataInfo listVo(SysStudent sysStudent)
+    public TableDataInfo listVo(StudentQueryRequest sysStudent)
     {
         startPage();
-        List<SysStudent> list = sysStudentService.selectSysStudentList(sysStudent);
+        List<SysStudent> list = sysStudentService.selectSysStudentListByDTO(sysStudent);
         return getDataTable(list);
     }
 
